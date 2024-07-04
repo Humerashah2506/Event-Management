@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Company</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        header .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        header .nav-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+
+        header .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        header .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        header .nav-links li a:hover {
+            color: #e74c3c;
+        }
+
+        .hero {
+            position: relative;
+            height: 80vh;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .carousel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: opacity 1s;
+        }
+
+        .hero .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero .carousel-item.active {
+            opacity: 1;
+        }
+
+        .hero .carousel-caption {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 2rem;
+            background: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section p {
+            font-size: 1.1rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .bg-light {
+            background: #f4f4f4;
+        }
+
+        .services-grid, .events-grid, .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-card, .event-card, .testimonial-item {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover, .event-card:hover, .testimonial-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card img, .event-card img, .gallery-grid img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .testimonial-carousel {
+            position: relative;
+        }
+
+        .testimonial-carousel .testimonial-item {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            transition: opacity 1s;
+        }
+
+        .testimonial-carousel .testimonial-item.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        form .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        form .form-group input,
+        form .form-group textarea,
+        form .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a class="logo" href="#">EventCo</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#booking">Booking Form</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="carousel">
+            <div class="carousel-item active">
+                <img src="event1.jpg" alt="Event 1">
+                <div class="carousel-caption">
+                    <h1>Making Your Events Unforgettable</h1>
+                    <a href="#booking" class="cta-button">Book Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="event2.jpg" alt="Event 2">
+                <div class="carousel-caption">
+                    <h1>Creating Memories</h1>
+                    <a href="#booking" class="cta-button">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="text-center">
+        <div class="container">
+            <h2>Welcome to EventCo</h2>
+            <p>We specialize in planning and managing unforgettable events that leave lasting impressions. From corporate events to weddings, we do it all with flair and professionalism.</p>
+        </div>
+    </section>
+
+    <section id="services" class="bg-light">
+        <div class="container">
+            <h2 class="text-center">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="corporate.jpg" alt="Corporate Events">
+                    <h3>Corporate Events</h3>
+                    <p>We provide professional planning and management for corporate events of all sizes.</p>
+                </div>
+                <div class="service-card">
+                    <img src="wedding.jpg" alt="Weddings">
+                    <h3>Weddings</h3>
+                    <p>From intimate gatherings to grand celebrations, we make your dream wedding come true.</p>
+                </div>
+                <div class="service-card">
+                    <img src="party.jpg" alt="Parties">
+                    <h3>Parties</h3>
+                    <p>We create memorable and exciting parties for all occasions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="text-center">
+        <div class="container">
+            <h2>Upcoming and Past Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <h3>Upcoming Events</h3>
+                    <p>Date: July 10, 2024</p>
+                    <p>Location: Islamabad, Pakistan</p>
+                    <p>Description: Annual Corporate Gala</p>
+                </div>
+                <div class="event-card">
+                    <h3>Past Events</h3>
+                    <p>Date: June 15, 2024</p>
+                    <p>Location: Lahore, Pakistan</p>
+                    <p>Description: Summer Wedding Extravaganza</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="bg-light">
+        <div class="container">
+            <h2 class="text-center">Gallery</h2>
+            <div class="gallery-grid">
+                <img src="gallery1.jpg" alt="Gallery Image 1">
+                <img src="gallery2.jpg" alt="Gallery Image 2">
+                <img src="gallery3.jpg" alt="Gallery Image 3">
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="text-center">
+        <div class="container">
+            <h2>Client Testimonials</h2>
+            <div class="testimonial-carousel">
+                <div class="testimonial-item active">
+                    <blockquote>
+                        <p>EventCo made our corporate event a huge success! Everything was perfectly organized.</p>
+                        <footer>Humera Shah</footer>
+                    </blockquote>
+                </div>
+                <div class="testimonial-item">
+                    <blockquote>
+                        <p>Our wedding was a dream come true, thanks to the amazing team at EventCo.</p>
+                        <footer>Seher, Bride</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2 class="text-center">Contact Us</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="container">
+            <h2 class="text-center">Booking Form</h2>
+            <form>
+                <div class="form-group">
+                    <label for="bookingName">Name</label>
+                    <input type="text" id="bookingName" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingEmail">Email</label>
+                    <input type="email" id="bookingEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingPhone">Phone Number</label>
+                    <input type="tel" id="bookingPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingEventType">Event Type</label>
+                    <select id="bookingEventType" required>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="party">Party</option>
+                        <option value="conference">Conference</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bookingDate">Date of Event</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingGuests">Number of Guests</label>
+                    <input type="number" id="bookingGuests" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingServices">Additional Services Required</label>
+                    <textarea id="bookingServices" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="bookingMessage">Message</label>
+                    <textarea id="bookingMessage" rows="4" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2024 EventCo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
